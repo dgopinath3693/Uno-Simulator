@@ -1,8 +1,10 @@
 
 import random
 
+playing = True
+
 #generates and returns deck of 108 cards of colors and numbers with repeats of everything
-#except 0 per the game setup
+#except 0 per the game setup, and with 4 of each wild cards 
 def BuildCardDeck():
     card_deck = []
     card_colors = ["Red", "Green", "Blue", "Yellow"]
@@ -32,12 +34,52 @@ def ShuffleCardDeck(deck):
 
 
 #draws cards for start of game
-def drawCards(num_cards):
-    #test
+def DrawStartCards():
+    num_cards = 7
+    start_deck = []
+    for x in range(num_cards):
+        start_deck.append(total_deck.pop(x))
+    return start_deck
+
+
+#shows the player the current hand of cards
+def ShowHand():
+    print("Current hand: ", start_deck)
+
+
+#allows a user to place down a card from the deck if matching the color/number/is a wild card
+def PlaceCardDown():
+    return 0
+
+#takes a new card if player's cards do not match last card's color/number/not wild card
+#or if other player puts down a +2 or +4
+def AddNewCard():
+    return 0
+
+#skips/reverses players turn if either player puts down a skip or reverse card
+def Skip():
+    return 0
+
+
+#panel of choices for the user to select
+def commandSelect(choice):
+    if choice == 1:
+        PlaceCardDown()
+    if choice == 2:
+        AddNewCard()
     
 
+while playing:  
+    
+    total_deck = BuildCardDeck()
+    total_deck = ShuffleCardDeck(total_deck)
+    start_deck = DrawStartCards()
 
-
-deckz = BuildCardDeck()
-deckz = ShuffleCardDeck(deckz)
-print(deckz)
+    print("Welcome to Uno Simulator!")
+    print("First, player 1 will go.") 
+    ShowHand() 
+    print("Player 1, please select what choice you would like to make: ")
+    print("1: place down a card from deck")
+    print("2: take a new card")
+    choice = int(input("Which choice?"))
+    commandSelect(choice)
