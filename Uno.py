@@ -58,7 +58,7 @@ def ShowHand(start_deck):
 
 #allows a user to place down a card from the deck if matching the color/number/is a wild card
 def PlaceCardDown(last_card, card_to_play):
-    if "Select Color" in card_to_play:
+    if ["Select Color", "Draw"] in card_to_play:
        card_to_play_parts = card_to_play
     else:
         last_card_parts = last_card.split()
@@ -78,19 +78,26 @@ def PlaceCardDown(last_card, card_to_play):
     else:
         print("This card is not eligible to be put down!")
 
+
 #takes a new card if player's cards do not match last card's color/number/not wild card
 #or if other player puts down a +2 or +4
-def AddNewCard():
-    #  if card_to_play == "Select Color & Draw 4":
-            
-    #     elif card_to_play == "Draw 2":
-    #         finally
-    #     elif card_to_play == "Draw 4":
-        
-    #     #select color
-    #     else:
-    #         card_to_play_parts = card_to_play
+def AddNewCard(deck, last_card):
+    #if last card was a draw card, add to existiing deck  
+    if ["Draw 2"] in last_card: 
+            deck.append(total_deck.pop())
+            deck.append(total_deck.pop())
+    if ["Draw 4"] in last_card: 
+            deck.append(total_deck.pop())
+            deck.append(total_deck.pop())
+            deck.append(total_deck.pop())
+            deck.append(total_deck.pop())
+    
+    #else, just take from total deck
+    else:
+        deck.append(total_deck.pop())
+        PlaceCardDown()
     return 0
+
 
 #skips/reverses players turn if either player puts down a skip or reverse card
 def Skip():
